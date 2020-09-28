@@ -17,7 +17,7 @@
 #' trans_df <- data.frame(id = "welcome", en = "Welcome", mri = "Haere mai")
 #' tr("welcome", "mri", trans_df)
 #'
-#' \notrun{
+#' \dontrun{
 #' require(RSQLite)
 #' con <- dbConnect(SQLite(), system.file("introduction.sqlite", package = "translatr"))
 #' options(translatr.con = con, translatr.tbl = "intro")
