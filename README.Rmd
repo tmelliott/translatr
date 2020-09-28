@@ -26,7 +26,7 @@ The translatr package provides a very simple interface for package developers to
 You can install the released version of translatr from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("translatr")
+# install.packages("translatr")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
