@@ -1,12 +1,12 @@
 Package: translatr
-Title: Translates text into different languages
+Title: Translate Text Into Different Languages
 Version: 0.0.0.9000
 Authors@R:
     person(given = "Tom",
            family = "Elliott",
            role = c("aut", "cre"),
            email = "tom.elliott@auckland.ac.nz",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0002-7815-6318"))
 Description: Makes it easy to provide language translations for your package. This is particularly beneficial for GUIs which provide contextual interfaces.
 License: GPL-3
 Encoding: UTF-8
@@ -19,4 +19,5 @@ Imports:
     magrittr,
     rlang
 Suggests:
+    covr,
     RSQLite
