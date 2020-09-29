@@ -48,7 +48,7 @@ tr("hello", "mri", trans_df)
 It's also possible to specify this information in a database, which can be edited externally. This might provide some performance improvements if you're translating lots of terms. This example uses a database, and also demonstrates setting global options to simplify your code:
 ```{r db_example}
 library(RSQLite)
-db <- system.file("introduction.sqlite", package = "translatr"))
+db <- system.file("introduction.sqlite", package = "translatr")
 con <- dbConnect(SQLite(), db)
 
 options(
