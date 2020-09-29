@@ -14,14 +14,15 @@
 #'
 #' @export
 #' @examples
-#' trans_df <- data.frame(id = "welcome", en = "Welcome", mri = "Haere mai")
-#' tr("welcome", "mri", trans_df)
+#' trans_df <- data.frame(id = "hello", en = "Hello", mri = "Kia ora")
+#' tr("hello", "mri", trans_df)
 #'
 #' \dontrun{
 #' require(RSQLite)
 #' con <- dbConnect(SQLite(), system.file("introduction.sqlite", package = "translatr"))
 #' options(translatr.con = con, translatr.tbl = "intro")
-#' tr("welcome", "fr")
+#' tr("hello", "fr")
+#' tr("statistics", "mri")
 #' }
 tr <- function(textid, language, table, id_col = 1L, con, tbl) {
     if (missing(language) || is.null(language))

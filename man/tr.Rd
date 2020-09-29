@@ -26,13 +26,14 @@ The translate function returns the translation of a text by ID.
 You can set the default language for your session using \code{options(translatr.language = 'mri')}, otherwise "en" will be used (by default). Similarly, you can specify the translation dictionary with the option \code{translatr.table}, or by supplying \code{translatr.con} and \code{translatr.tbl} to connect to a database with a table containing the translations.
 }
 \examples{
-trans_df <- data.frame(id = "welcome", en = "Welcome", mri = "Haere mai")
-tr("welcome", "mri", trans_df)
+trans_df <- data.frame(id = "hello", en = "Hello", mri = "Kia ora")
+tr("hello", "mri", trans_df)
 
 \dontrun{
 require(RSQLite)
 con <- dbConnect(SQLite(), system.file("introduction.sqlite", package = "translatr"))
 options(translatr.con = con, translatr.tbl = "intro")
-tr("welcome", "fr")
+tr("hello", "fr")
+tr("statistics", "mri")
 }
 }

@@ -38,10 +38,25 @@ devtools::install_github("tmelliott/translatr")
 ```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
+The simplest way to get started is to define a data frame containing one row for each term, with translations in columns for various languages you wish to provide:
 ```{r example}
 library(translatr)
-trans_df <- data.frame(id = "welcome", en = "Welcome", mri = "Haere mai")
-tr("welcome", "mri", trans_df)
+trans_df <- data.frame(id = "hello", en = "Hello", mri = "Kia ora")
+tr("hello", "mri", trans_df)
+```
+
+It's also possible to specify this information in a database, which can be edited externally. This might provide some performance improvements if you're translating lots of terms. This example uses a database, and also demonstrates setting global options to simplify your code:
+```{r db_example}
+library(RSQLite)
+db <- system.file("introduction.sqlite", package = "translatr"))
+con <- dbConnect(SQLite(), db)
+
+options(
+  translatr.language = "mri",
+  translatr.con = con,
+  translatr.tbl = "intro" # name of the table with translations
+)
+
+tr("hello")
+tr("statistics")
 ```

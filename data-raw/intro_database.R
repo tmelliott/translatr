@@ -1,9 +1,9 @@
 ## code to prepare `DATASET` dataset goes here
 trans_df <- data.frame(
-    id = c("welcome", "hello"),
-    en = c("Welcome", "Hello"),
-    mri = c("Haere mai", "Kia ora"),
-    fr = c("Bienvenue", "Bonjour")
+    id = c("welcome", "hello", "statistics"),
+    en = c("Welcome", "Hello", "statistics"),
+    mri = c("Haere mai", "Kia ora", "tatauranga"),
+    fr = c("Bienvenue", "Bonjour", "les statistiques")
 )
 
 library(RSQLite)
