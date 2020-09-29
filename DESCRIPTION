@@ -20,4 +20,5 @@ Imports:
     rlang
 Suggests:
     covr,
-    RSQLite
+    RSQLite,
+    testthat
