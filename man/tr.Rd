@@ -9,7 +9,7 @@ tr(textid, language, table, id_col = 1L, con, tbl)
 \arguments{
 \item{textid}{the character ID of the string to translate}
 
-\item{language}{the language code to translate to}
+\item{language}{the language code to translate to. Users may specify a second language as a fallback by passing a vector of length 2.}
 
 \item{table}{a data.frame-like object with translations}
 

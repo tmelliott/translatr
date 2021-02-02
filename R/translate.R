@@ -6,7 +6,7 @@
 #'
 #'
 #' @param textid the character ID of the string to translate
-#' @param language the language code to translate to
+#' @param language the language code to translate to. Users may specify a second language as a fallback by passing a vector of length 2.
 #' @param table a data.frame-like object with translations
 #' @param id_col index or name of the column containing text IDs
 #' @param con a database connection containing necessary translation tables
@@ -53,12 +53,16 @@ tr <- function(textid, language, table, id_col = 1L, con, tbl) {
 .translate <- function(table, id, lang, id_col) UseMethod(".translate")
 
 .translate.data.frame <- function(table, id, lang, id_col = 1L) {
-    if (!lang %in% colnames(table))
-        stop(sprintf("I don't speak %s", lang))
+    if (!lang[1] %in% colnames(table))
+        stop(sprintf("I don't speak %s", lang[1]))
 
     rownames(table) <- table[[id_col]]
     colnames(table) <- tolower(colnames(table))
-    table[id, lang]
+
+    final <- ifelse(id %in% rownames(table), table[id, lang[1]], id)
+    if (length(lang) > 1L)
+        final <- ifelse(is.na(final) | final == "", table[id, lang[2]], final)
+    final
 }
 
 .translate.tbl_sql <- function(table, id, lang, id_col) {
