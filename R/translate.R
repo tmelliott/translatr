@@ -2,7 +2,7 @@
 #'
 #' The translate function returns the translation of a text by ID.
 #'
-#' You can set the default language for your session using `options(translatr.language = 'mri')`, otherwise "en" will be used (by default). Similarly, you can specify the translation dictionary with the option `translatr.table`, or by supplying `translatr.con` and `translatr.tbl` to connect to a database with a table containing the translations.
+#' You can set the default language for your session using `options(translatr.language = 'māori')`, otherwise "english" will be used (by default). Similarly, you can specify the translation dictionary with the option `translatr.table`, or by supplying `translatr.con` and `translatr.tbl` to connect to a database with a table containing the translations.
 #'
 #'
 #' @param textid the character ID of the string to translate
@@ -27,7 +27,7 @@
 tr <- function(textid, language, table, id_col = 1L, con, tbl) {
     if (missing(language) || is.null(language))
         language <- getOption("translatr.language")
-    if (is.null(language)) language <- "en"
+    if (is.null(language)) language <- colnames(table)[2]
 
     # try dialects (en -> en-gb, en-us etc; OR en-us -> en-gb, en)
 
