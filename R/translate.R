@@ -31,7 +31,7 @@ tr <- function(textid, language, table, id_col = 1L, con, tbl) {
 
     # try dialects (en -> en-gb, en-us etc; OR en-us -> en-gb, en)
 
-    language <- tolower(language)
+    language <- language
 
     if (missing(table) || is.null(table))
         table <- getOption("translatr.table")
@@ -57,7 +57,7 @@ tr <- function(textid, language, table, id_col = 1L, con, tbl) {
         stop(sprintf("I don't speak %s", lang[1]))
 
     rownames(table) <- table[[id_col]]
-    colnames(table) <- tolower(colnames(table))
+    colnames(table) <- colnames(table)
 
     final <- ifelse(id %in% rownames(table), table[id, lang[1]], id)
     if (length(lang) > 1L)
