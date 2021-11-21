@@ -7,11 +7,14 @@
 tr(textid, language, table, id_col = 1L, con, tbl)
 }
 \arguments{
-\item{textid}{the character ID of the string to translate}
+\item{textid}{the unique ID of the string to translate}
 
-\item{language}{the language code to translate to. Users may specify a second language as a fallback by passing a vector of length 2.}
+\item{language}{the language code to translate to.
+Users may specify a second language as a fallback by
+passing a vector of length 2.}
 
-\item{table}{a data.frame-like object with translations}
+\item{table}{a data.frame object (or something that can be coerced to one)
+with translations (optional, see details)}
 
 \item{id_col}{index or name of the column containing text IDs}
 
@@ -20,20 +23,35 @@ tr(textid, language, table, id_col = 1L, con, tbl)
 \item{tbl}{the name of the table in the database containing the translations}
 }
 \description{
-The translate function returns the translation of a text by ID.
+The translate function returns the translation of a word or phrase stored
+in the database or translation dataframe. Translations are identified by
+their unique ID.
 }
 \details{
-You can set the default language for your session using \code{options(translatr.language = 'mri')}, otherwise "en" will be used (by default). Similarly, you can specify the translation dictionary with the option \code{translatr.table}, or by supplying \code{translatr.con} and \code{translatr.tbl} to connect to a database with a table containing the translations.
+You can set the default language for your session using
+\code{options(translatr.language = 'mi')}, otherwise the first non-ID column
+in the translation table will be used. Similarly, you can specify the
+translation dictionary with the option \code{translatr.table},
+or by supplying \code{translatr.con} and \code{translatr.tbl} to connect
+to a database with a table containing the translations.
+
+The language codes do not necessarily need to follow any rule, since nothing
+is automated in the process - so long as \emph{your} interface provides the correct
+language identifier, it will work. That said, we recommend you choose and stick to
+a standard format, such as those listed here
+\url{https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes}.
+In the examples given, we use ISO 639-1.
 }
 \examples{
-trans_df <- data.frame(id = "hello", en = "Hello", mri = "Kia ora")
-tr("hello", "mri", trans_df)
+trans_df <- data.frame(id = "hello", en = "Hello", mi = "Kia ora")
+tr("hello", "mi", trans_df)
 
-\dontrun{
 require(RSQLite)
 con <- dbConnect(SQLite(), system.file("introduction.sqlite", package = "translatr"))
 options(translatr.con = con, translatr.tbl = "intro")
 tr("hello", "fr")
-tr("statistics", "mri")
-}
+tr("statistics", "mi")
+
+# but there's no clever automatic translation going on:
+DBI::dbReadTable(con, "intro")
 }

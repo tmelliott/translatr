@@ -9,22 +9,30 @@
 status](https://github.com/tmelliott/translatr/workflows/R-CMD-check/badge.svg)](https://github.com/tmelliott/translatr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/tmelliott/translatr/branch/master/graph/badge.svg)](https://codecov.io/gh/tmelliott/translatr?branch=master)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/translatr)](https://CRAN.R-project.org/package=translatr)
+
 <!-- badges: end -->
 
 The translatr package provides a very simple interface for package
 developers to provide translations of the output or user interfaces
-(e.g., GUI text).
+(e.g., GUI text). This package **does not** automatically translate
+arbitrary text - there are existing packages that do that (such as
+[translateR](https://cran.r-project.org/web/packages/translateR/)).
 
 ## Installation
 
-You can install the released version of translatr from
-[CRAN](https://CRAN.R-project.org) with:
+<!--
+You can install the released version of translatr from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 # install.packages("translatr")
-```
+``` -->
 
-And the development version from [GitHub](https://github.com/) with:
+The development version is available from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("devtools")
@@ -39,8 +47,8 @@ you wish to provide:
 
 ``` r
 library(translatr)
-trans_df <- data.frame(id = "hello", en = "Hello", mri = "Kia ora")
-tr("hello", "mri", trans_df)
+trans_df <- data.frame(id = "hello", en = "Hello", mi = "Kia ora")
+tr("hello", "mi", trans_df)
 #> [1] "Kia ora"
 ```
 
@@ -55,7 +63,7 @@ db <- system.file("introduction.sqlite", package = "translatr")
 con <- dbConnect(SQLite(), db)
 
 options(
-  translatr.language = "mri",
+  translatr.language = "mi",
   translatr.con = con,
   translatr.tbl = "intro" # name of the table with translations
 )

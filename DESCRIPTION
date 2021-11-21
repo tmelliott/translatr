@@ -1,18 +1,18 @@
 Package: translatr
 Title: Translate Text Into Different Languages
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R:
     person(given = "Tom",
            family = "Elliott",
            role = c("aut", "cre"),
            email = "tom.elliott@auckland.ac.nz",
            comment = c(ORCID = "0000-0002-7815-6318"))
-Description: Makes it easy to provide language translations for your package. This is particularly beneficial for GUIs which provide contextual interfaces.
+Description: Makes it easy to provide language translations for your package. This is particularly beneficial for GUIs which provide contextual interfaces and developers need high-level control over language options.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports:
     dbplyr,
     dplyr,

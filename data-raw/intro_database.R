@@ -2,7 +2,7 @@
 trans_df <- data.frame(
     id = c("welcome", "hello", "statistics"),
     en = c("Welcome", "Hello", "statistics"),
-    mri = c("Haere mai", "Kia ora", "tatauranga"),
+    mi = c("Haere mai", "Kia ora", "tatauranga"),
     fr = c("Bienvenue", "Bonjour", "les statistiques")
 )
 
