@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tomelliott.co.nz/translatr/404.html</loc>
+  </url>
+  <url>
+    <loc>https://tomelliott.co.nz/translatr/authors.html</loc>
+  </url>
+  <url>
     <loc>https://tomelliott.co.nz/translatr/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tomelliott.co.nz/translatr/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tomelliott.co.nz/translatr/reference/index.html</loc>
   </url>
   <url>
     <loc>https://tomelliott.co.nz/translatr/reference/pipe.html</loc>

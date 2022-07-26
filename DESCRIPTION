@@ -1,6 +1,6 @@
 Package: translatr
 Title: Translate Text Into Different Languages
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:
     person(given = "Tom",
            family = "Elliott",
@@ -12,13 +12,12 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Imports:
-    dbplyr,
-    dplyr,
-    magrittr,
-    rlang
+    jsonlite,
+    tools
 Suggests:
     covr,
     RSQLite,
-    testthat
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

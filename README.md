@@ -8,7 +8,7 @@
 [![R build
 status](https://github.com/tmelliott/translatr/workflows/R-CMD-check/badge.svg)](https://github.com/tmelliott/translatr/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/tmelliott/translatr/branch/master/graph/badge.svg)](https://codecov.io/gh/tmelliott/translatr?branch=master)
+coverage](https://codecov.io/gh/tmelliott/translatr/branch/main/graph/badge.svg)](https://codecov.io/gh/tmelliott/translatr?branch=main)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
@@ -21,6 +21,9 @@ developers to provide translations of the output or user interfaces
 (e.g., GUI text). This package **does not** automatically translate
 arbitrary text - there are existing packages that do that (such as
 [translateR](https://cran.r-project.org/web/packages/translateR/)).
+However, this package has been designed to be compatible with
+translation tools such as [crowdin](https://crowdin.com). See the
+‘Crowdin’ Vignette for details.
 
 ## Installation
 
@@ -41,35 +44,54 @@ devtools::install_github("tmelliott/translatr")
 
 ## Example
 
-The simplest way to get started is to define a data frame containing one
-row for each term, with translations in columns for various languages
-you wish to provide:
+To get started, first create translation files, typically stored in a
+directory `i18n`.
+
+``` r
+i18n_temp <- file.path(tempdir(), "i18n")
+dir.create(i18n_temp)
+jsonlite::write_json(
+  list("hello" = "Hello everyone!"),
+  file.path(i18n_temp, "en.json"),
+  pretty = TRUE,
+  auto_unbox = TRUE
+)
+jsonlite::write_json(
+  list("hello" = "Kia ora koutou!"),
+  file.path(i18n_temp, "mi.json"),
+  pretty = TRUE,
+  auto_unbox = TRUE
+)
+```
+
+Now set the options so `translatr` knows where to look for translations,
+which language to use, and where to cache the files in memory:
 
 ``` r
 library(translatr)
-trans_df <- data.frame(id = "hello", en = "Hello", mi = "Kia ora")
-tr("hello", "mi", trans_df)
-#> [1] "Kia ora"
+options(
+  translatr.location = i18n_temp,
+  translatr.language = "en",
+  translatr.env = new.env()
+)
 ```
 
-It’s also possible to specify this information in a database, which can
-be edited externally. This might provide some performance improvements
-if you’re translating lots of terms. This example uses a database, and
-also demonstrates setting global options to simplify your code:
+Now, just use the handy `tr()` function to translate text.
 
 ``` r
-library(RSQLite)
-db <- system.file("introduction.sqlite", package = "translatr")
-con <- dbConnect(SQLite(), db)
-
-options(
-  translatr.language = "mi",
-  translatr.con = con,
-  translatr.tbl = "intro" # name of the table with translations
-)
-
 tr("hello")
-#> [1] "Kia ora"
-tr("statistics")
-#> [1] "tatauranga"
+#> [1] "Hello everyone!"
+tr("hello", "mi")
+#> [1] "Kia ora koutou!"
+```
+
+You can change the global options at any time, for example when a user
+changes their preferences.
+
+``` r
+tr("hello")
+#> [1] "Hello everyone!"
+options(translatr.language = "mi")
+tr("hello")
+#> [1] "Kia ora koutou!"
 ```

@@ -1,9 +1,4 @@
-inst/introduction.sqlite: data-raw/intro_database.R
-	@echo 'Re-building database ...'
-	@rm -r $@
-	@Rscript $^
-
-document: inst/introduction.sqlite
+document:
 	@echo 'Writing documentation ...'
 	@Rscript --silent -e 'roxygen2::roxygenize()'
 

@@ -1,8 +1,8 @@
 pandoc: 2.9.2.1
-pkgdown: 1.6.1
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-11-21T22:10Z
+last_built: 2022-07-26T09:35Z
 urls:
   reference: https://tomelliott.co.nz/translatr/reference
   article: https://tomelliott.co.nz/translatr/articles
