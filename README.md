@@ -5,10 +5,9 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/tmelliott/translatr/workflows/R-CMD-check/badge.svg)](https://github.com/tmelliott/translatr/actions)
+[![R-CMD-check](https://github.com/tmelliott/translatr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tmelliott/translatr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/tmelliott/translatr/branch/main/graph/badge.svg)](https://codecov.io/gh/tmelliott/translatr?branch=main)
+coverage](https://codecov.io/gh/tmelliott/translatr/branch/main/graph/badge.svg)](https://codecov.io/gh/tmelliott/translatr?branch=develop)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
