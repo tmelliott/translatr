@@ -24,6 +24,12 @@ However, this package has been designed to be compatible with
 translation tools such as [crowdin](https://crowdin.com). See the
 ‘Crowdin’ Vignette for details.
 
+This package is very lightweight (only one dependency, **jsonlite**).
+There is a similar package
+[shiny.i18n](https://github.com/Appsilon/shiny.i18n) with some more
+advanced featuers, but this has a load of dependencies that make it
+bloated for non-shiny applications.
+
 ## Installation
 
 <!--
@@ -43,41 +49,38 @@ devtools::install_github("tmelliott/translatr")
 
 ## Example
 
-To get started, first create translation files, typically stored in a
-directory `i18n`.
-
-``` r
-i18n_temp <- file.path(tempdir(), "i18n")
-dir.create(i18n_temp)
-jsonlite::write_json(
-  list("hello" = "Hello everyone!"),
-  file.path(i18n_temp, "en.json"),
-  pretty = TRUE,
-  auto_unbox = TRUE
-)
-jsonlite::write_json(
-  list("hello" = "Kia ora koutou!"),
-  file.path(i18n_temp, "mi.json"),
-  pretty = TRUE,
-  auto_unbox = TRUE
-)
-```
-
-Now set the options so `translatr` knows where to look for translations,
-which language to use, and where to cache the files in memory:
+To get started, you’ll need a directory, typically called `i18n`, with
+your translation files.
 
 ``` r
 library(translatr)
-options(
-  translatr.location = i18n_temp,
-  translatr.language = "en",
-  translatr.env = new.env()
-)
+
+i18n_dir <- system.file("i18n", package = "translatr")
+list.files(i18n_dir)
+#> [1] "en.json" "mi.json"
+jsonlite::prettify(readLines(file.path(i18n_dir, "en.json")))
+#> {
+#>     "hello": "Hello everyone!"
+#> }
+#> 
 ```
 
-Now, just use the handy `tr()` function to translate text.
+The `tr()` function is used to translate strings by looking them up in
+the translation dictionary by key:
 
 ``` r
+tr("hello", "mi", i18n_dir)
+#> [1] "Kia ora koutou!"
+```
+
+Of course, this is tedious if you have lots of strings to translate\! To
+avoid this, you can specify ‘language’ and ‘location’ as global options:
+
+``` r
+options(
+  translatr.location = i18n_dir,
+  translatr.language = "en"
+)
 tr("hello")
 #> [1] "Hello everyone!"
 tr("hello", "mi")

@@ -4,19 +4,31 @@
 \alias{tr}
 \title{Translate strings}
 \usage{
-tr(id, language = getOption("translatr.language"))
+tr(
+  id,
+  language = getOption("translatr.language"),
+  location = getOption("translatr.location")
+)
 }
 \arguments{
 \item{id}{the key referencing the desired text}
 
-\item{language}{the language to provide. This is best set using \code{options(translatr.language = "language")}.}
+\item{language}{the language to provide, looks for \code{getOption(translatr.language)} by default.}
+
+\item{location}{the location of translation files, looks for \code{getOption(translatr.location)} by default.}
 }
 \value{
 a translated character string
 }
 \description{
-This function uses i18n translations files to provide multi-lingual support for GUIs build with R.
+This function uses i18n translations files to provide multi-lingual support for GUIs build with R. The best way to get started is to load this package and then set the \code{translatr.language} and \code{translatr.location} global options:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{options(
+  translatr.language = 'mi',
+  translatr.location = '/path/to/i18n'
+)
+}\if{html}{\out{</div>}}
 }
 \examples{
-cat('Please see README')
+tr('hello', 'mi', system.file('i18n', package = 'transitr'))
 }

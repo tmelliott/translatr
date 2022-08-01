@@ -26,6 +26,8 @@ knitr::opts_chunk$set(
 
 The translatr package provides a very simple interface for package developers to provide translations of the output or user interfaces (e.g., GUI text). This package **does not** automatically translate arbitrary text - there are existing packages that do that (such as [translateR](https://cran.r-project.org/web/packages/translateR/)). However, this package has been designed to be compatible with translation tools such as [crowdin](https://crowdin.com). See the 'Crowdin' Vignette for details.
 
+This package is very lightweight (only one dependency, **jsonlite**). There is a similar package [shiny.i18n](https://github.com/Appsilon/shiny.i18n) with some more advanced featuers, but this has a load of dependencies that make it bloated for non-shiny applications.
+
 ## Installation
 
 <!--
@@ -44,39 +46,29 @@ devtools::install_github("tmelliott/translatr")
 
 ## Example
 
-To get started, first create translation files, typically stored in a directory `i18n`.
+To get started, you'll need a directory, typically called `i18n`, with your translation files.
 
 ```{r create_files}
-i18n_temp <- file.path(tempdir(), "i18n")
-dir.create(i18n_temp)
-jsonlite::write_json(
-  list("hello" = "Hello everyone!"),
-  file.path(i18n_temp, "en.json"),
-  pretty = TRUE,
-  auto_unbox = TRUE
-)
-jsonlite::write_json(
-  list("hello" = "Kia ora koutou!"),
-  file.path(i18n_temp, "mi.json"),
-  pretty = TRUE,
-  auto_unbox = TRUE
-)
-```
-
-Now set the options so `translatr` knows where to look for translations, which language to use, and where to cache the files in memory:
-
-```{r setup}
 library(translatr)
-options(
-  translatr.location = i18n_temp,
-  translatr.language = "en",
-  translatr.env = new.env()
-)
+
+i18n_dir <- system.file("i18n", package = "translatr")
+list.files(i18n_dir)
+jsonlite::prettify(readLines(file.path(i18n_dir, "en.json")))
 ```
 
-Now, just use the handy `tr()` function to translate text.
+The `tr()` function is used to translate strings by looking them up in the translation dictionary by key:
 
-```{r example}
+```{r basic}
+tr("hello", "mi", i18n_dir)
+```
+
+Of course, this is tedious if you have lots of strings to translate! To avoid this, you can specify 'language' and 'location' as global options:
+
+```{r options}
+options(
+  translatr.location = i18n_dir,
+  translatr.language = "en"
+)
 tr("hello")
 tr("hello", "mi")
 ```
@@ -87,8 +79,4 @@ You can change the global options at any time, for example when a user changes t
 tr("hello")
 options(translatr.language = "mi")
 tr("hello")
-```
-
-```{r, echo=FALSE}
-invisible(unlink(i18n_temp, TRUE, TRUE))
 ```
