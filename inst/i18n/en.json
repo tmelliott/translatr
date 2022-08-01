@@ -1,3 +1,5 @@
 {
-  "hello": "Hello everyone!"
+  "hello": "Hello everyone!",
+  "welcome": "Welcome",
+  "demo_message": "This is a demonstration message!"
 }

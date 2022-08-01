@@ -39,9 +39,13 @@ tr <- function(id,
 
 get_translations <- function(language, location) {
     e <- getOption("translatr.env")
+    if (is.null(e)) {
+        warning("It looks like `getOption('translatr.env')` has been corrupted/overwritten. Files are not being cached!")
+        e <- new.env()
+    }
 
     # if language exists in env, return the env
-    if (exists(language, envir = e))
+    if (!is.null(e) && !is.null(e[[language]]))
         return(e)
 
     # add language to env and return the env
