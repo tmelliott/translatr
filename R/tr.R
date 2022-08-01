@@ -13,7 +13,7 @@
 #' @param location the location of translation files, looks for `getOption(translatr.location)` by default.
 #' @return a translated character string
 #' @examples
-#' tr('hello', 'mi', system.file('i18n', package = 'transitr'))
+#' tr('hello', 'mi', system.file('i18n', package = 'translatr'))
 #' @md
 #' @export
 tr <- function(id,

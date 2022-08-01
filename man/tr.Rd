@@ -30,5 +30,5 @@ This function uses i18n translations files to provide multi-lingual support for 
 }\if{html}{\out{</div>}}
 }
 \examples{
-tr('hello', 'mi', system.file('i18n', package = 'transitr'))
+tr('hello', 'mi', system.file('i18n', package = 'translatr'))
 }
